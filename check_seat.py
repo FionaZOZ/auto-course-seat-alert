@@ -134,4 +134,13 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    if "--test-email" in sys.argv:
+        send_email(
+            "✅ Seat Alert 测试邮件",
+            "如果你收到这封邮件，说明邮件通知配置成功！\n\n"
+            "系统会每 5 分钟检查一次以下课程：\n"
+            + "\n".join(f"• {g['label']} ({g['query_codes']})" for g in WATCH_LIST)
+            + "\n\n有空位时会自动发邮件通知你。",
+        )
+    else:
+        main()
